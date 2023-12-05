@@ -40,8 +40,8 @@ Vous devez créer une API d'e-commerce pour permettre à des utilisateurs de com
 
 ### MCD
 
-![](assets/mcd.png)
+![](mcd.png)
 
 ### MLD
 
-![](assets/mld.png)
+![](mld.png)
