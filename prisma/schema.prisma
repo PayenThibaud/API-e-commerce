@@ -7,5 +7,32 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL")
+}
+
+
+model Products {
+  product_UUID            String    @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_name            String    @db.VarChar(20)
+  product_description     String    @db.Text()
+  product_price           Float
+  product_quantity        Int       @default(1)
+  created_at              DateTime  @default(now())
+  updated_at              DateTime  @default(now())
+}
+
+model Users {
+  user_UUID               String    @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  user_pseudo             String    @unique() @db.VarChar(20) @unique
+  username                String    @db.VarChar(30) @Unique()
+  user_password           String    @db.VarChar(72)
+  created_at              DateTime  @default(now())
+}
+
+model Orders {
+  order_number            Int       @id @default(autoincrement())
+  order_total_cost_ht     String    @db.VarChar(36)
+  order_total_quantity    Int       @default(1)
+  created_at              DateTime  @default(now())
+  deliver_at              DateTime  @default(now())
 }
