@@ -12,27 +12,37 @@ datasource db {
 
 
 model Products {
-  product_UUID            String    @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  product_name            String    @db.VarChar(20)
-  product_description     String    @db.Text()
+  product_UUID            String      @id(map: "products_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  product_name            String      @db.VarChar(20)
+  product_description     String      @db.Text()
   product_price           Float
-  product_quantity        Int       @default(1)
-  created_at              DateTime  @default(now())
-  updated_at              DateTime  @default(now())
+  product_quantity        Int         @default(1)
+  created_at              DateTime    @default(now())
+  updated_at              DateTime    @default(now())
+
+ // Relation avec Orders (Un produit peut être inclus dans plusieurs commandes)
+  orders              Orders[]  @relation("productOrders", fields: [product_UUID], references: [order_number])
 }
 
 model Users {
-  user_UUID               String    @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
-  user_pseudo             String    @unique() @db.VarChar(20) @unique
-  username                String    @db.VarChar(30) @Unique()
-  user_password           String    @db.VarChar(72)
-  created_at              DateTime  @default(now())
+  user_UUID                String     @id(map: "users_uuid") @unique() @default(uuid()) @db.VarChar(36) //UUIDv4
+  user_pseudo              String     @db.VarChar(20)
+  username                 String     @db.VarChar(30) 
+  user_password            String     @db.VarChar(72)
+  created_at               DateTime   @default(now())
+
+  // Relation avec Orders (Un utilisateur peut passer plusieurs commandes)
+  orders          Orders[]  @relation("userOrders", fields: [user_UUID], references: [order_number])
 }
 
 model Orders {
-  order_number            Int       @id @default(autoincrement())
-  order_total_cost_ht     String    @db.VarChar(36)
-  order_total_quantity    Int       @default(1)
-  created_at              DateTime  @default(now())
-  deliver_at              DateTime  @default(now())
+  order_number            Int        @id @default(autoincrement()) @unique()
+  order_total_cost_ht     String     @db.VarChar(36)
+  order_total_quantity    Int        @default(1)
+  created_at              DateTime   @default(now())
+  deliver_at              DateTime   @default(now())
+
+  // Relations
+  products            Products[] @relation("productOrders", fields: [order_number], references: [product_UUID])
+  user                Users      @relation("userOrders", fields: [order_number], references: [user_UUID])
 }
