@@ -27,14 +27,14 @@ let OrdersController = class OrdersController {
     findAll() {
         return this.ordersService.findAll();
     }
-    findOne(id) {
-        return this.ordersService.findOne(+id);
+    findOne(uuid) {
+        return this.ordersService.findOne(+uuid);
     }
-    update(id, updateOrderDto) {
-        return this.ordersService.update(+id, updateOrderDto);
+    update(uuid, updateOrderDto) {
+        return this.ordersService.update(+uuid, updateOrderDto);
     }
-    remove(id) {
-        return this.ordersService.remove(+id);
+    remove(uuid) {
+        return this.ordersService.remove(+uuid);
     }
 };
 exports.OrdersController = OrdersController;
@@ -52,23 +52,23 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrdersController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Get)(':uuid'),
+    __param(0, (0, common_1.Param)('uuid')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], OrdersController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Patch)(':uuid'),
+    __param(0, (0, common_1.Param)('uuid')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, update_order_dto_1.UpdateOrderDto]),
     __metadata("design:returntype", void 0)
 ], OrdersController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)(':uuid'),
+    __param(0, (0, common_1.Param)('uuid')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
