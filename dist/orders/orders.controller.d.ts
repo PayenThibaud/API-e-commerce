@@ -6,7 +6,7 @@ export declare class OrdersController {
     constructor(ordersService: OrdersService);
     create(createOrderDto: CreateOrderDto): string;
     findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updateOrderDto: UpdateOrderDto): string;
-    remove(id: string): string;
+    findOne(uuid: string): string;
+    update(uuid: string, updateOrderDto: UpdateOrderDto): string;
+    remove(uuid: string): string;
 }
